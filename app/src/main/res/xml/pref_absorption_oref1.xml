@@ -94,6 +94,20 @@
                 validate:testType="floatNumericRange" />
 
             <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
+                android:defaultValue="1.0"
+                android:dialogMessage="@string/openapsama_autoisf_min_summary"
+                android:digits="0123456789.,"
+                android:inputType="numberDecimal"
+                android:key="@string/key_openapsama_autoisf_min"
+                android:maxLines="20"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/openapsama_autoisf_min"
+                validate:floatmaxNumber="1"
+                validate:floatminNumber="0.3"
+                validate:testType="floatNumericRange" />
+
+            <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
                 android:defaultValue="0.2"
                 android:dialogMessage="@string/openapsama_autoisf_hourlychange_summary"
                 android:digits="0123456789.,"
@@ -108,7 +122,7 @@
                 validate:testType="floatNumericRange" />
 
             <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
-                android:defaultValue="0.2"
+                android:defaultValue="0.0"
                 android:dialogMessage="@string/openapsama_lower_ISFrange_weight_summary"
                 android:digits="0123456789.,"
                 android:inputType="numberDecimal"
@@ -122,7 +136,7 @@
                 validate:testType="floatNumericRange" />
 
             <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
-                android:defaultValue="0.2"
+                android:defaultValue="0.0"
                 android:dialogMessage="@string/openapsama_higher_ISFrange_weight_summary"
                 android:digits="0123456789.,"
                 android:inputType="numberDecimal"
@@ -136,7 +150,7 @@
                 validate:testType="floatNumericRange" />
 
             <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
-                android:defaultValue="0.2"
+                android:defaultValue="0.0"
                 android:dialogMessage="@string/openapsama_delta_ISFrange_weight_summary"
                 android:digits="0123456789.,"
                 android:inputType="numberDecimal"
@@ -150,7 +164,7 @@
                 validate:testType="floatNumericRange" />
 
             <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
-                android:defaultValue="0.02"
+                android:defaultValue="0.0"
                 android:dialogMessage="@string/openapsama_postmeal_ISF_weight_summary"
                 android:digits="0123456789.,"
                 android:inputType="numberDecimal"
@@ -160,6 +174,34 @@
                 android:singleLine="true"
                 android:title="@string/openapsama_postmeal_ISF_weight"
                 validate:floatmaxNumber="2"
+                validate:floatminNumber="0"
+                validate:testType="floatNumericRange" />
+
+            <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
+                android:defaultValue="0.0"
+                android:dialogMessage="@string/openapsama_BgAccel_ISF_weight_summary"
+                android:digits="0123456789.,"
+                android:inputType="numberDecimal"
+                android:key="@string/key_openapsama_BgAccel_ISF_weight"
+                android:maxLines="20"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/openapsama_BgAccel_ISF_weight"
+                validate:floatmaxNumber="2"
+                validate:floatminNumber="0"
+                validate:testType="floatNumericRange" />
+
+            <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
+                android:defaultValue="0.0"
+                android:dialogMessage="@string/openapsama_BgBrake_ISF_weight_summary"
+                android:digits="0123456789.,"
+                android:inputType="numberDecimal"
+                android:key="@string/key_openapsama_BgBrake_ISF_weight"
+                android:maxLines="20"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/openapsama_BgBrake_ISF_weight"
+                validate:floatmaxNumber="1"
                 validate:floatminNumber="0"
                 validate:testType="floatNumericRange" />
 

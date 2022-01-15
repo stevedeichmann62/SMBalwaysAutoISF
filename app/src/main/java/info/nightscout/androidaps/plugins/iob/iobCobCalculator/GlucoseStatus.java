@@ -44,6 +44,10 @@ public class GlucoseStatus {
     public double delta_pl = 0d;
     public double delta_pn = 0d;
     public double r_squ = 0d;
+    public double bg_acceleration = 0d;
+    public double a_0 = 0d;
+    public double a_1 = 0d;
+    public double a_2 = 0d;
     public String pp_debug = "; debug:";
     public String log() {
         return "Glucose: " + DecimalFormatter.to0Decimal(glucose) + " mg/dl " +
@@ -59,6 +63,7 @@ public class GlucoseStatus {
                 "parabola length: " + DecimalFormatter.to2Decimal(dura_p) + " min; " +
                 "parabola last delta: " + DecimalFormatter.to2Decimal(delta_pl) + " mg/dl; " +
                 "parabola next delta: " + DecimalFormatter.to2Decimal(delta_pn) + " mg/dl; " +
+                "bg_acceleration: " + DecimalFormatter.to2Decimal(bg_acceleration) + " mg/dl/(25m^2); " +
                 "fit correlation: " + r_squ + pp_debug;
     }
 
@@ -85,7 +90,12 @@ public class GlucoseStatus {
         this.dura_p = Round.roundTo(this.dura_p, 0.1);
         this.delta_pl = Round.roundTo(this.delta_pl, 0.01);
         this.delta_pn = Round.roundTo(this.delta_pn, 0.01);
+        this.bg_acceleration = Round.roundTo(this.bg_acceleration, 0.01);
         this.r_squ = Round.roundTo(this.r_squ, 0.0001);
+        this.a_0 = Round.roundTo(this.a_0, 0.1);
+        this.a_1 = Round.roundTo(this.a_1, 0.01);
+        this.a_2 = Round.roundTo(this.a_2, 0.01);
+
         return this;
     }
 
@@ -145,6 +155,10 @@ public class GlucoseStatus {
                 status.dura_p = 0d;
                 status.delta_pl = 0d;
                 status.delta_pn = 0d;
+                status.bg_acceleration = 0d;
+                status.a_0 = 0d;
+                status.a_1 = 0d;
+                status.a_2 = 0d;
                 status.r_squ = 0d;
                 aapsLogger.debug(LTag.GLUCOSE, "sizeRecords==1");
                 return status.round();
@@ -293,19 +307,27 @@ public class GlucoseStatus {
             //  y = a*x^2  + b*x  + c       respectively
 
             // initially just test the handling of arguments
-            status.dura_p  = 47.11d;
-            status.delta_pl = 4.711d;
-            status.delta_pn = 4.711d;
-            status.r_squ   = 0.4711d;
             double best_a = 0d;
             double best_b = 0d;
             double best_c = 0d;
+            status.dura_p  = 0d;
+            status.delta_pl = 0d;
+            status.delta_pn = 0d;
+            status.bg_acceleration = 0d;
+            status.r_squ   = 0d;
+            status.a_0 = 0d;
+            status.a_1 = 0d;
+            status.a_2 = 0d;
 
             if (sizeRecords <= 3) {                      // last 3 points make a trivial parabola
                 status.dura_p  = 0d;
                 status.delta_pl = 0d;
                 status.delta_pn = 0d;
+                status.bg_acceleration = 0d;
                 status.r_squ   = 0d;
+                status.a_0 = 0d;
+                status.a_1 = 0d;
+                status.a_2 = 0d;
             } else {
                 //double corrMin = 0.90;                  // go backwards until the correlation coefficient goes below
                 double sy    = 0d;                        // y
@@ -331,7 +353,11 @@ public class GlucoseStatus {
                             status.dura_p =  -ti_last / 60.0d;
                             status.delta_pl = 0d;
                             status.delta_pn = 0d;
+                            status.bg_acceleration= 0d;
                             status.r_squ = 0d;
+                            status.a_0 = 0d;
+                            status.a_1 = 0d;
+                            status.a_2 = 0d;
                         }
                         break;
                     }
@@ -379,6 +405,10 @@ public class GlucoseStatus {
                                 status.dura_p = -ti / 60.0d;            // remember we are going backwards in time
                                 status.delta_pl = -(a * Math.pow(-5 * 60, 2) - b * 5 * 60);     // 5 minute slope from last fitted bg starting from last bg, i.e. t=0
                                 status.delta_pn =   a * Math.pow( 5 * 60, 2) + b * 5 * 60;      // 5 minute slope to next fitted bg starting from last bg, i.e. t=0
+                                status.bg_acceleration = 2*a*300*300;                           // 2nd derivative of parabola per (5min)^2
+                                status.a_0 = c;
+                                status.a_1 = b*300;
+                                status.a_2 = a*300*300;
                                 status.r_squ = r_squ;
                                 best_a = a;
                                 best_b = b;
