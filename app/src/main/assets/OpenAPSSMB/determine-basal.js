@@ -313,8 +313,8 @@ function autoISF(sens, target_bg, profile, glucose_status, meal_data, currentTim
             liftISF = maxISFReduction;                                                                          // mod V14j
             //sens = round(profile.sens / Math.max(maxISFReduction, sensitivityRatio, 1);
         }                                                                                                       // mod V14j
-        if ( liftISF >= 1 ) { final_ISF = max(liftISF, sensitivityRatio); }
-        if ( liftISF <  1 ) { final_ISF = min(liftISF, sensitivityRatio); }
+        if ( liftISF >= 1 ) { final_ISF = Math.max(liftISF, sensitivityRatio); }
+        if ( liftISF <  1 ) { final_ISF = Math.min(liftISF, sensitivityRatio); }
         return round(profile.sens / final_ISF, 1);
     }
     return sens;                                                                                                // mod V14j: nothing changed
