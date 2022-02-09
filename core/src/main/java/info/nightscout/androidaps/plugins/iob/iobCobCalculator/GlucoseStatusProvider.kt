@@ -2,12 +2,17 @@ package info.nightscout.androidaps.plugins.iob.iobCobCalculator
 
 import dagger.Reusable
 import info.nightscout.androidaps.interfaces.IobCobCalculator
+import info.nightscout.androidaps.utils.DateUtil
 import info.nightscout.shared.logging.AAPSLogger
 import info.nightscout.shared.logging.LTag
-import info.nightscout.androidaps.utils.DateUtil
+import org.spongycastle.asn1.x500.style.RFC4519Style
 import java.util.*
 import javax.inject.Inject
 import kotlin.math.roundToLong
+import org.spongycastle.asn1.x500.style.RFC4519Style.c
+
+
+
 
 @Reusable
 class GlucoseStatusProvider @Inject constructor(
@@ -194,46 +199,51 @@ class GlucoseStatusProvider @Inject constructor(
         var deltaPl = 0.0
         var deltaPn = 0.0
         var bgAcceleration = 0.0
-        var rSqu = 0.0
+        var corrMax = 0.0
         var a0 = 0.0
         var a1 = 0.0
         var a2 = 0.0
-        var corrMax = 0.0
 
-        if (sizeRecords <= 3) {                      // last 3 points make a trivial parabola
-            duraP = 0.0
-            deltaPl = 0.0
-            deltaPn = 0.0
-            bgAcceleration = 0.0
-            rSqu = 0.0
-            a0 = 0.0
-            a1 = 0.0
-            a2 = 0.0
-        } else {
+        //if (sizeRecords <= 3) {                      // last 3 points make a trivial parabola
+        //    duraP = 0.0
+        //    deltaPl = 0.0
+        //    deltaPn = 0.0
+        //    bgAcceleration = 0.0
+        //    corrMax = 0.0
+        //    a0 = 0.0
+        //    a1 = 0.0
+        //    a2 = 0.0
+        //} else {
+        if (sizeRecords > 3) {
             //double corrMin = 0.90;                  // go backwards until the correlation coefficient goes below
-            var sy = 0.0 // y
-            var sx = 0.0 // x
-            var sx2 = 0.0 // x^2
-            var sx3 = 0.0 // x^3
-            var sx4 = 0.0 // x^4
-            var sxy = 0.0 // x*y
+            var sy   = 0.0 // y
+            var sx   = 0.0 // x
+            var sx2  = 0.0 // x^2
+            var sx3  = 0.0 // x^3
+            var sx4  = 0.0 // x^4
+            var sxy  = 0.0 // x*y
             var sx2y = 0.0 // x^2*y
+            //  corrMax = 0.0
             val iframe = data[0]
             val time0: Long = iframe.timestamp
             var tiLast = 0.0
+            //# for best numerical accurarcy time and bg must be of same order of magnitude
+            val scaleTime = 300.0 //# in 5m; values are  0, -1, -2, -3, -4, ...
+            val scaleBg   =  50.0 //# TIR range is now 1.4 - 3.6
+
             for (i in 0 until sizeRecords) {
                 val then = data[i]
                 val thenDate = then.timestamp
-                val ti = (thenDate - time0) / 1000.0
-                if (-ti > 47 * 60) {                        // skip records older than 47.5 minutes
+                val ti = (thenDate - time0) / 1000.0 / scaleTime
+                if (-ti * scaleTime > 47 * 60 ) {                       // skip records older than 47.5 minutes
                     break
-                } else if (ti < tiLast - 7.5 * 60) {       // stop scan if a CGM gap > 7.5 minutes is detected
-                    if (i < 3) {                             // history too short for fit
+                } else if (ti < tiLast - 7.5 * 60 / scaleTime)  {       // stop scan if a CGM gap > 7.5 minutes is detected
+                    if (i < 3) {                                        // history too short for fit
                         duraP = -tiLast / 60.0
                         deltaPl = 0.0
                         deltaPn = 0.0
                         bgAcceleration = 0.0
-                        rSqu = 0.0
+                        corrMax = 0.0
                         a0 = 0.0
                         a1 = 0.0
                         a2 = 0.0
@@ -241,7 +251,7 @@ class GlucoseStatusProvider @Inject constructor(
                     break
                 }
                 tiLast = ti
-                val bg: Double = then.value
+                val bg = then.value / scaleBg
                 sx += ti
                 sx2 += Math.pow(ti, 2.0)
                 sx3 += Math.pow(ti, 3.0)
@@ -250,7 +260,7 @@ class GlucoseStatusProvider @Inject constructor(
                 sxy += ti * bg
                 sx2y += Math.pow(ti, 2.0) * bg
                 val n = i + 1
-                var D = 0.0
+                var D  = 0.0
                 var Da = 0.0
                 var Db = 0.0
                 var Dc = 0.0
@@ -261,36 +271,38 @@ class GlucoseStatusProvider @Inject constructor(
                     Dc = sx4 * (sx2 * sy - sx * sxy) - sx3 * (sx3 * sy - sx * sx2y) + sx2 * (sx3 * sxy - sx2 * sx2y)
                 }
                 if (D != 0.0) {
-                    val a = Da / D
+                    val a: Double = Da / D
                     b = Db / D // b defined in linear fit !?
-                    val c = Dc / D
+                    val c: Double = Dc / D
                     val yMean = sy / n
-                    var sSquares = 0.0
+                    var sSquares  = 0.0
                     var sResidualSquares = 0.0
                     for (j in 0..i) {
                         val before = data[j]
-                        sSquares += Math.pow(before.value - yMean, 2.0)
-                        val deltaT: Double = (before.timestamp - time0) / 1000.0
-                        sResidualSquares += Math.pow(before.value - a * Math.pow(deltaT, 2.0) - b * deltaT - c, 2.0)
+                        sSquares += Math.pow(before.value / scaleBg - yMean, 2.0)
+                        val deltaT: Double = (before.timestamp - time0) / 1000.0 / scaleTime
+                        val bgj: Double = a * Math.pow(deltaT, 2.0) + b * deltaT + c
+                        sResidualSquares += Math.pow(before.value / scaleBg - bgj, 2.0)
                     }
-                    rSqu = 0.64
+                    var rSqu = 0.64
                     if (sSquares != 0.0) {
                         rSqu = 1 - sResidualSquares / sSquares
                     }
                     if (n > 3) {
-                        if (rSqu > corrMax) {
+                        if (rSqu >= corrMax) {
                             corrMax = rSqu
                             // double delta_t = (then_date - time_0) / 1000;
-                            duraP = -ti / 60.0 // remember we are going backwards in time
-                            deltaPl = -(a * Math.pow((-5 * 60).toDouble(), 2.0) - b * 5 * 60) // 5 minute slope from last fitted bg starting from last bg, i.e. t=0
-                            deltaPn = a * Math.pow((5 * 60).toDouble(), 2.0) + b * 5 * 60 // 5 minute slope to next fitted bg starting from last bg, i.e. t=0
-                            bgAcceleration = 2 * a * 300 * 300
-                            a0 = c
-                            a1 = b * 300
-                            a2 = a * 300 * 300
-                            bestA = a
-                            bestB = b
-                            bestC = c
+                            duraP = -ti * scaleTime / 60.0 // remember we are going backwards in time
+                            val delta5Min = 5 * 60 / scaleTime
+                            deltaPl = -scaleBg * (a * Math.pow(-delta5Min, 2.0) - b * delta5Min) // 5 minute slope from last fitted bg starting from last bg, i.e. t=0
+                            deltaPn =  scaleBg * (a * Math.pow( delta5Min, 2.0) + b * delta5Min) // 5 minute slope to next fitted bg starting from last bg, i.e. t=0
+                            bgAcceleration = 2 * a * scaleBg
+                            a0 = c * scaleBg
+                            a1 = b * scaleBg
+                            a2 = a * scaleBg
+                            bestA = a * scaleBg
+                            bestB = b * scaleBg
+                            bestC = c * scaleBg
                         }
                     }
                 }
