@@ -277,18 +277,23 @@ public class GlucoseStatus {
                 long then_date = then.date;
                 minutesL = (now_date - then_date) / (1000L * 60);
                 // watch out: the scan goes backwards in time, so delta has wrong sign
-                if (minutesL>level && level==7.5) {
+
+                if(i*sumt2 == sumt*sumt) {
+                    b = 0d;
+                }
+                else {
                     b = (i*sumxy - sumt*sumBG) / (i*sumt2 - sumt*sumt);
+                }
+
+                if (minutesL>level && level==7.5) {
                     status.slope05 = - b * 5;
                     level = 17.5d;
                 }
                 if (minutesL>level && level == 17.5) {
-                    b = (i*sumxy - sumt*sumBG) / (i*sumt2 - sumt*sumt);
                     status.slope15 = - b * 5;
                     level = 42.5d;
                 }
                 if (minutesL>level && level == 42.5) {
-                    b = (i*sumxy - sumt*sumBG) / (i*sumt2 - sumt*sumt);
                     status.slope40 = - b * 5;
                     break;
                 }
