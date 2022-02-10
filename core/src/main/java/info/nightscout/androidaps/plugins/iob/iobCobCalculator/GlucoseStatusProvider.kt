@@ -162,18 +162,21 @@ class GlucoseStatusProvider @Inject constructor(
             val thenDate = then.timestamp
             minutesL = (nowDate - thenDate) / (1000L * 60)
             // watch out: the scan goes backwards in time, so delta has wrong sign
-            if (minutesL > level && level == 7.5) {
+            if(i * sumt2 == sumt * sumt) {
+                b = 0.0
+            }
+            else {
                 b = (i * sumxy - sumt * sumBG) / (i * sumt2 - sumt * sumt)
+            }
+            if (minutesL > level && level == 7.5) {
                 slope05 = -b * 5
                 level = 17.5
             }
             if (minutesL > level && level == 17.5) {
-                b = (i * sumxy - sumt * sumBG) / (i * sumt2 - sumt * sumt)
                 slope15 = -b * 5
                 level = 42.5
             }
             if (minutesL > level && level == 42.5) {
-                b = (i * sumxy - sumt * sumBG) / (i * sumt2 - sumt * sumt)
                 slope40 = -b * 5
                 break
             }
