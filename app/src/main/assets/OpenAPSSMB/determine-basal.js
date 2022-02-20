@@ -262,8 +262,8 @@ function autoISF(sens, target_bg, profile, glucose_status, meal_data, currentTim
         console.error("delta_ISF adaptation by-passed as average glucose < "+target_bg+"+10");
     } else if (glucose_status.short_avgdelta<0) {
         console.error("delta_ISF adaptation by-passed as no rise or too short lived");
-    } else if (profile.enableppisf_always || profile.postmeal_ISF_duration >= (currentTime - meal_data.lastCarbTime) / 1000/3600) {     // corrected logic on 17.Sep.2021
-        pp_ISF = 1 + Math.max(0, bg_delta * profile.postmeal_ISF_weight);
+    } else if (profile.enableppisf_always || profile.postprandial_ISF_duration >= (currentTime - meal_data.lastCarbTime) / 1000/3600) {     // corrected logic on 17.Sep.2021
+        pp_ISF = 1 + Math.max(0, bg_delta * profile.postprandial_ISF_weight);
         console.error("pp_ISF adaptation is", round(pp_ISF,2));
         if (pp_ISF != 1) {
             sens_modified = true;

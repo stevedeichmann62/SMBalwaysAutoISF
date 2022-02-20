@@ -369,12 +369,12 @@
     <string name="openapsama_higher_ISFrange_weight_summary">Default value: 0.0\nThis is the weight applied to the polygon which adapats ISF if glucose is above target. \n\nWith 0.0 the effect is effectively disabled.</string>
     <string name="key_openapsama_delta_ISFrange_weight" translatable="false">delta_ISFrange_weight</string>
     <string name="openapsama_delta_ISFrange_weight_summary">Default value: 0.0\nThis is the weight applied to the polygon which adapats ISF higher deltas. \n\nWith 0.0 the effect is effectively disabled.</string>
-    <string name="key_openapsama_postmeal_ISF_weight" translatable="false">postmeal_ISF_weight</string>
-    <string name="openapsama_postmeal_ISF_weight_summary">Default value: 0.0\nThis is the weight applied to the linear slope while glucose rises and  which adapts ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
-    <string name="key_openapsama_postmeal_ISF_duration" translatable="false">postmeal_ISF_duration</string>
-    <string name="openapsama_postmeal_ISF_duration_summary">Default value: 3\nThis is the duration in hours how long after a meal the effect will be active. \n\nAAPS will delete carb timing after 10 hours latest no matter what you enter.</string>
-    <!--    <string name="key_enable_postmeal_ISF_always" translatable="false">enable_postmeal_ISF_always</string> -->
-    <string name="enable_postmeal_ISF_always_summary">Enable the postprandial ISF adaptation all the time regardless of when the last meal was taken.</string>
+    <string name="key_openapsama_postprandial_ISF_weight" translatable="false">postprandial_ISF_weight</string>
+    <string name="openapsama_postprandial_ISF_weight_summary">Default value: 0.0\nThis is the weight applied to the linear slope while glucose rises and  which adapts ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
+    <string name="key_openapsama_postprandial_ISF_duration" translatable="false">postprandial_ISF_duration</string>
+    <string name="openapsama_postprandial_ISF_duration_summary">Default value: 3\nThis is the duration in hours how long after a meal the effect will be active. \n\nAAPS will delete carb timing after 10 hours latest no matter what you enter.</string>
+    <!--    <string name="key_enable_postprandial_ISF_always" translatable="false">enable_postprandial_ISF_always</string> -->
+    <string name="enable_postprandial_ISF_always_summary">Enable the postprandial ISF adaptation all the time regardless of when the last meal was taken.</string>
     <string name="key_openapsama_BgAccel_ISF_weight" translatable="false">BgAccel_ISF_weight</string>
     <string name="openapsama_BgAccel_ISF_weight_summary">Default value: 0.0\nThis is the weight applied while glucose accelerates and which strengthens ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
     <string name="key_openapsama_BgBrake_ISF_weight" translatable="false">BgBrake_ISF_weight</string>
@@ -657,7 +657,7 @@
     <string name="key_enableautoISF_with_COB" translatable="false">enableautoISF_with_COB</string>
     <string name="enableautoISFwithcob">Enable autoISF with COB</string>
     <string name="enableautoISFwithcob_summary">Enable autoISF when there is COB active</string>
-    <string name="enable_postmeal_ISF_always">Enable autoISF postprandial all day</string>
+    <string name="enable_postprandial_ISF_always">Enable autoISF postprandial all day</string>
     <string name="key_enableSMB_always" translatable="false">enableSMB_always</string>
     <string name="key_enableSMB_with_COB" translatable="false">enableSMB_with_COB</string>
     <string name="key_enableSMB_with_temptarget" translatable="false">enableSMB_with_temptarget</string>
@@ -804,8 +804,8 @@
     <string name="openapsama_lower_ISFrange_weight">lower ISF-range weight</string>
     <string name="openapsama_higher_ISFrange_weight">higher ISF-range weight</string>
     <string name="openapsama_delta_ISFrange_weight">delta ISF-range weight</string>
-    <string name="openapsama_postmeal_ISF_weight">postprandial ISF weight</string>
-    <string name="openapsama_postmeal_ISF_duration">postprandial ISF time window</string>
+    <string name="openapsama_postprandial_ISF_weight">postprandial ISF weight</string>
+    <string name="openapsama_postprandial_ISF_duration">postprandial ISF time window</string>
     <string name="openapsama_BgAccel_ISF_weight">ISF weight while BG accelerates</string>
     <string name="openapsama_BgBrake_ISF_weight">ISF weight while BG decelerates</string>
     <string name="openapsama_autoisf_hourlychange">autoisf hourly increment</string>

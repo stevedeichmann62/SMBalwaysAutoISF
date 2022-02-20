@@ -248,8 +248,8 @@ class DetermineBasalAdapterSMBJS internal constructor(private val scriptReader: 
         this.profile.put("lower_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_lower_ISFrange_weight, "1.0")))
         this.profile.put("higher_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_higher_ISFrange_weight, "1.0")))
         this.profile.put("delta_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_delta_ISFrange_weight, "1.0")))
-        this.profile.put("postmeal_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postmeal_ISF_weight, "0.02")))
-        this.profile.put("postmeal_ISF_duration",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postmeal_ISF_duration, "120")))
+        this.profile.put("postprandial_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_weight, "0.02")))
+        this.profile.put("postprandial_ISF_duration",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_duration, "120")))
         this.profile.put("bgAccel_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgAccel_ISF_weight, "0.02")))
         this.profile.put("bgBrake_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgBrake_ISF_weight, "0.95")))
 
