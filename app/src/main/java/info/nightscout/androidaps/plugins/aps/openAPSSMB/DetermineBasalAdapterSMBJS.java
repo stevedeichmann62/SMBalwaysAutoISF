@@ -310,8 +310,8 @@ public class DetermineBasalAdapterSMBJS {
         mProfile.put("lower_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_lower_ISFrange_weight, "1.0")));
         mProfile.put("higher_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_higher_ISFrange_weight, "1.0")));
         mProfile.put("delta_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_delta_ISFrange_weight, "1.0")));
-        mProfile.put("postmeal_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postmeal_ISF_weight, "0.02")));
-        mProfile.put("postmeal_ISF_duration",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postmeal_ISF_duration, "120")));
+        mProfile.put("postprandial_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_weight, "0.02")));
+        mProfile.put("postprandial_ISF_duration",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_duration, "120")));
         mProfile.put("bgAccel_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgAccel_ISF_weight, "0.02")));
         mProfile.put("bgBrake_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgBrake_ISF_weight, "0.95")));
 
