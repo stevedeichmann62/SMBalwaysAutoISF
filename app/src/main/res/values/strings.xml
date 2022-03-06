@@ -352,7 +352,7 @@
     <string name="openapsama_smb_delivery_ratio_summary">Default value: 0.5 This is another key OpenAPS safety cap, and specifies what share of the total insulin required can be delivered as SMB. This is to prevent people from getting into dangerous territory by setting SMB requests from the caregivers phone at the same time. Increase this experimental value slowly and with caution.</string>
     <string name="openapsama_smb_delivery_ratio_min_summary">Default value: 0.5 This is the lower end of a linearly increasing ratio rather than the fix value above.</string>
     <string name="openapsama_smb_delivery_ratio_max_summary">Default value: 0.9 This is the upper end of a linearly increasing ratio rather than the fix value above.</string>
-    <string name="openapsama_smb_delivery_ratio_bg_range_summary">Default value: 40. The linearly increasing SMB delivery ratio is mapped to the glucose range [target_bg, target_bg+bg_range].\nAt target_bg the SMB ratio is smb_delivery_ratio_min, at target_bg+bg_range it is smb_delivery_ratio_max\nWith 0 the linearly increasing SMB ratio is disabled and the fix smb_delivery_ratio is used.</string>
+    <string name="openapsama_smb_delivery_ratio_bg_range_summary">Default value: 0. The linearly increasing SMB delivery ratio is mapped to the glucose range [target_bg, target_bg+bg_range].\nAt target_bg the SMB ratio is smb_delivery_ratio_min, at target_bg+bg_range it is smb_delivery_ratio_max\nWith 0 the linearly increasing SMB ratio is disabled and the fixed smb_delivery_ratio is used.</string>
     <string name="openapsama_smb_max_range_extension_summary">Default value: 1 This is another key OpenAPS safety cap, and specifies by what factor you can exceed the regular 120 maxSMB/maxUAM minutes. Increase this experimental value slowly and with caution.</string>
     <string name="key_openapsama_autosens_max" translatable="false">autosens_max</string>
     <string name="openapsama_autosens_max_summary">Default value: 1.2\nThis is a multiplier cap for autosens (and soon autotune) to set a 20%% max limit on how high the autosens ratio can be, which in turn determines how high autosens can adjust basals, how low it can adjust ISF, and how low it can set the BG target.</string>
@@ -373,7 +373,7 @@
     <string name="openapsama_postprandial_ISF_weight_summary">Default value: 0.0\nThis is the weight applied to the linear slope while glucose rises and  which adapts ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
     <string name="key_openapsama_postprandial_ISF_duration" translatable="false">postprandial_ISF_duration</string>
     <string name="openapsama_postprandial_ISF_duration_summary">Default value: 3\nThis is the duration in hours how long after a meal the effect will be active. \n\nAAPS will delete carb timing after 10 hours latest no matter what you enter.</string>
-    <!--    <string name="key_enable_postprandial_ISF_always" translatable="false">enable_postprandial_ISF_always</string> -->
+    <string name="key_enable_postprandial_ISF_always" translatable="false">enable_postprandial_ISF_always</string>
     <string name="enable_postprandial_ISF_always_summary">Enable the postprandial ISF adaptation all the time regardless of when the last meal was taken.</string>
     <string name="key_openapsama_BgAccel_ISF_weight" translatable="false">BgAccel_ISF_weight</string>
     <string name="openapsama_BgAccel_ISF_weight_summary">Default value: 0.0\nThis is the weight applied while glucose accelerates and which strengthens ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
@@ -567,6 +567,7 @@
     <string name="openapssmb">OpenAPS SMB</string>
     <string name="key_use_smb" translatable="false">use_smb</string>
     <string name="key_use_uam" translatable="false">use_uam</string>
+    <string name="key_use_autoisf" translatable="false">openapsama_useautoisf</string>
     <string name="key_smb_enable_carbs_suggestions_threshold" translatable="false">smb_enable_carbs_suggestions_threshold</string>
     <string name="enableuam">Enable UAM</string>
     <string name="enablesmb">Enable SMB</string>
