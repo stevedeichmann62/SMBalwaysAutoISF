@@ -253,7 +253,7 @@
                 validate:testType="floatNumericRange" />
 
             <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
-                android:defaultValue="0.9"
+                android:defaultValue="0.5"
                 android:dialogMessage="@string/openapsama_smb_delivery_ratio_max_summary"
                 android:digits="0123456789.,"
                 android:inputType="number"
