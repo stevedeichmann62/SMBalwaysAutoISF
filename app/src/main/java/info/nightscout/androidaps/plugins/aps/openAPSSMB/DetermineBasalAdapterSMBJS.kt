@@ -188,12 +188,11 @@ class DetermineBasalAdapterSMBJS internal constructor(private val scriptReader: 
         this.profile.put("current_basal_safety_multiplier", sp.getDouble(R.string.key_openapsama_current_basal_safety_multiplier, 4.0))
 
         // mod 10: include SMB manipulations to be accessible in determine-basal
-        this.profile.put("smb_delivery_ratio", sp.getDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio, "0.5"), 0.5))
-        this.profile.put("smb_delivery_ratio_min", sp.getDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio_min, "0.5"),0.5))
-        this.profile.put("smb_delivery_ratio_max", sp.getDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio_max, "0.5"),0.5))
-        this.profile.put("smb_delivery_ratio_bg_range", sp.getDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio_bg_range, "0.0"), 0.0))
-        this.profile.put("smb_max_range_extension", sp.getDouble(sp.getString(R.string.key_openapsama_smb_max_range_extension, "1.0"), 1.0))
-
+        this.profile.put("smb_delivery_ratio", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio, "0.5")))
+        this.profile.put("smb_delivery_ratio_min", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio_min, "0.5")))
+        this.profile.put("smb_delivery_ratio_max", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio_max, "0.5")))
+        this.profile.put("smb_delivery_ratio_bg_range", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio_bg_range, "0")))
+        this.profile.put("smb_max_range_extension", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_smb_max_range_extension, "1.0")))
         //mProfile.put("high_temptarget_raises_sensitivity", SP.getBoolean(R.string.key_high_temptarget_raises_sensitivity, SMBDefaults.high_temptarget_raises_sensitivity));
         this.profile.put("high_temptarget_raises_sensitivity", false)
         //mProfile.put("low_temptarget_lowers_sensitivity", SP.getBoolean(R.string.key_low_temptarget_lowers_sensitivity, SMBDefaults.low_temptarget_lowers_sensitivity));
@@ -242,17 +241,16 @@ class DetermineBasalAdapterSMBJS internal constructor(private val scriptReader: 
         // mod 14f: for pp_ISF without meal
         this.profile.put("enableppisf_always", sp.getBoolean(R.string.key_enable_postprandial_ISF_always, false))
         // mod 7d: can I add autosens_min here?
-        this.profile.put("autoisf_max",  sp.getDouble(sp.getString(R.string.key_openapsama_autoisf_max, "1.2"),1.2))
-        this.profile.put("autoisf_min",  sp.getDouble(sp.getString(R.string.key_openapsama_autoisf_min, "1.0"), 1.0))
-        this.profile.put("autoisf_hourlychange",  sp.getDouble(sp.getString(R.string.key_openapsama_autoisf_hourlychange, "0.2"), 0.2))
-        this.profile.put("lower_ISFrange_weight",  sp.getDouble(sp.getString(R.string.key_openapsama_lower_ISFrange_weight, "0.0"),0.0))
-        this.profile.put("higher_ISFrange_weight",  sp.getDouble(sp.getString(R.string.key_openapsama_higher_ISFrange_weight, "0.0"),0.0))
-        this.profile.put("delta_ISFrange_weight",  sp.getDouble(sp.getString(R.string.key_openapsama_delta_ISFrange_weight, "0.0"),0.0))
-        this.profile.put("postprandial_ISF_weight",  sp.getDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_weight, "0.0"),0.0))
-        this.profile.put("postprandial_ISF_duration",  sp.getDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_duration, "0.0"),0.0))
-        this.profile.put("bgAccel_ISF_weight",  sp.getDouble(sp.getString(R.string.key_openapsama_BgAccel_ISF_weight, "0.0"),0.0))
-        this.profile.put("bgBrake_ISF_weight",  sp.getDouble(sp.getString(R.string.key_openapsama_BgBrake_ISF_weight, "0.0"),0.0))
-
+        this.profile.put("autoisf_max",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoisf_max, "1.2")))
+        this.profile.put("autoisf_min",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoisf_min, "1.0")))
+        this.profile.put("autoisf_hourlychange",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoisf_hourlychange, "0.2")))
+        this.profile.put("lower_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_lower_ISFrange_weight, "0.0")))
+        this.profile.put("higher_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_higher_ISFrange_weight, "0.0")))
+        this.profile.put("delta_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_delta_ISFrange_weight, "0.0")))
+        this.profile.put("postprandial_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_weight, "0.0")))
+        this.profile.put("postprandial_ISF_duration",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_duration, "0.0")))
+        this.profile.put("bgAccel_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgAccel_ISF_weight, "0.0")))
+        this.profile.put("bgBrake_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgBrake_ISF_weight, "0.0")))
         if (profileFunction.getUnits() == GlucoseUnit.MMOL) {
             this.profile.put("out_units", "mmol/L")
         }
