@@ -48,8 +48,8 @@ class GlucoseStatusProvider @Inject constructor(
                 longAvgDelta = 0.0,
                 date = nowDate,
                 // mod 7: append 2 variables for 5% range
-                autoISF_duration = 0.0,
-                autoISF_average = now.value,
+                dura_ISF_minutes = 0.0,
+                dura_ISF_average = now.value,
                 // mod 8: append 3 variables for deltas based on regression analysis
                 slope05 = 0.0, // wait for longer history
                 slope15 = 0.0, // wait for longer history
@@ -321,8 +321,8 @@ class GlucoseStatusProvider @Inject constructor(
             shortAvgDelta = shortAverageDelta,
             delta = delta,
             longAvgDelta = average(longDeltas),
-            autoISF_average = oldavg,
-            autoISF_duration = minutesdur.toDouble(),
+            dura_ISF_average = oldavg,
+            dura_ISF_minutes = minutesdur.toDouble(),
             slope05 = slope05,
             slope15 = slope15,
             slope40 = slope40,

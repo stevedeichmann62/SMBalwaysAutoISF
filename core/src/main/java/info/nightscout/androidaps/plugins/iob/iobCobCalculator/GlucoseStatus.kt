@@ -11,8 +11,8 @@ data class GlucoseStatus(
     val longAvgDelta: Double = 0.0,
     val date: Long = 0L,
     // mod 7: append 2 variables for 5% range
-    val autoISF_duration: Double = 0.0,
-    val autoISF_average: Double = 0.0,
+    val dura_ISF_minutes: Double = 0.0,
+    val dura_ISF_average: Double = 0.0,
     // mod 8: append 3 variables for deltas based on regression analysis
     val slope05: Double = 0.0, // wait for longer history
     val slope15: Double = 0.0, // wait for longer history
@@ -34,8 +34,8 @@ data class GlucoseStatus(
         "Delta: " + DecimalFormatter.to0Decimal(delta) + " mg/dl " +
         "Short avg. delta: " + " " + DecimalFormatter.to2Decimal(shortAvgDelta) + " mg/dl " +
         "Long avg. delta: " + DecimalFormatter.to2Decimal(longAvgDelta) + " mg/dl " +
-        "Range length: " + DecimalFormatter.to0Decimal(autoISF_duration) + " min " +
-        "Range average: " + DecimalFormatter.to2Decimal(autoISF_average) + " mg/dl; " +
+        "Range length: " + DecimalFormatter.to0Decimal(dura_ISF_minutes) + " min " +
+        "Range average: " + DecimalFormatter.to2Decimal(dura_ISF_average) + " mg/dl; " +
         "5 min fit delta: " + DecimalFormatter.to2Decimal(slope05) + " mg/dl; " +
         "15 min fit delta: " + DecimalFormatter.to2Decimal(slope15) + " mg/dl; " +
         "40 min fit delta: " + DecimalFormatter.to2Decimal(slope40) + " mg/dl; " +
@@ -52,8 +52,8 @@ fun GlucoseStatus.asRounded() = copy(
     delta = Round.roundTo(delta, 0.01),
     shortAvgDelta = Round.roundTo(shortAvgDelta, 0.01),
     longAvgDelta = Round.roundTo(longAvgDelta, 0.01),
-    autoISF_duration = Round.roundTo(autoISF_duration, 0.1),
-    autoISF_average = Round.roundTo(autoISF_average, 0.1),
+    dura_ISF_minutes = Round.roundTo(dura_ISF_minutes, 0.1),
+    dura_ISF_average = Round.roundTo(dura_ISF_average, 0.1),
     slope05  = Round.roundTo(slope05, 0.01),
     slope15 = Round.roundTo(slope15, 0.01),
     slope40 = Round.roundTo(slope40, 0.01),

@@ -235,20 +235,20 @@ class DetermineBasalAdapterSMBJS internal constructor(private val scriptReader: 
         this.profile.put("autosens_max", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autosens_max, "1.2")))
 
         // mod 7e: can I add use autoisf here?
-        this.profile.put("use_autoisf", sp.getBoolean(R.string.key_use_autoisf, false))
+        this.profile.put("enable_autoISF", sp.getBoolean(R.string.key_enable_autoISF, false))
         // mod 7f: can I add use autoisf with COB here?
-        this.profile.put("enableautoisf_with_COB", sp.getBoolean(R.string.key_enableautoISF_with_COB, false))
+        this.profile.put("enable_dura_ISF_with_COB", sp.getBoolean(R.string.key_enable_dura_ISF_with_COB, false))
         // mod 14f: for pp_ISF without meal
-        this.profile.put("enableppisf_always", sp.getBoolean(R.string.key_enable_postprandial_ISF_always, false))
+        this.profile.put("enable_pp_ISF_always", sp.getBoolean(R.string.key_enable_postprandial_ISF_always, false))
         // mod 7d: can I add autosens_min here?
-        this.profile.put("autoisf_max",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoisf_max, "1.2")))
-        this.profile.put("autoisf_min",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoisf_min, "1.0")))
-        this.profile.put("autoisf_hourlychange",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoisf_hourlychange, "0.2")))
+        this.profile.put("autoISF_max",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoISF_max, "1.2")))
+        this.profile.put("autoISF_min",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoISF_min, "1.0")))
+        this.profile.put("dura_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_dura_ISF_weight, "0.2")))
         this.profile.put("lower_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_lower_ISFrange_weight, "0.0")))
         this.profile.put("higher_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_higher_ISFrange_weight, "0.0")))
         this.profile.put("delta_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_delta_ISFrange_weight, "0.0")))
-        this.profile.put("postprandial_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_weight, "0.0")))
-        this.profile.put("postprandial_ISF_duration",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_postprandial_ISF_duration, "0.0")))
+        this.profile.put("pp_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_pp_ISF_weight, "0.0")))
+        this.profile.put("pp_ISF_hours",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_pp_ISF_hours, "0.0")))
         this.profile.put("bgAccel_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgAccel_ISF_weight, "0.0")))
         this.profile.put("bgBrake_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_BgBrake_ISF_weight, "0.0")))
         if (profileFunction.getUnits() == GlucoseUnit.MMOL) {
@@ -275,8 +275,8 @@ class DetermineBasalAdapterSMBJS internal constructor(private val scriptReader: 
         mGlucoseStatus.put("date", glucoseStatus.date)
 
         // mod 7: append 2 variables for 5% range
-        mGlucoseStatus.put("autoISF_duration", glucoseStatus.autoISF_duration)
-        mGlucoseStatus.put("autoISF_average", glucoseStatus.autoISF_average)
+        mGlucoseStatus.put("dura_ISF_minutes", glucoseStatus.dura_ISF_minutes)
+        mGlucoseStatus.put("dura_ISF_average", glucoseStatus.dura_ISF_average)
         // mod 8: append variables for linear fit
         mGlucoseStatus.put("slope05", glucoseStatus.slope05)
         mGlucoseStatus.put("slope15", glucoseStatus.slope15)
