@@ -330,7 +330,13 @@
     <string name="openapsma_scriptdebugdata_label">Script debug</string>
     <string name="openapsama_useautosens">Use Autosens feature</string>
     <string name="refresheventsfromnightscout">Refresh events from NS</string>
-    <string name="autoISF_settings_title">Settings for autoISF feature</string>
+    <string name="autoISF_settings_title">autoISF settings</string>
+    <string name="acce_ISF_settings_title">acce_ISF settings: accelerating/decelerating blood glucose</string>
+    <string name="bg_ISF_settings_title">bg_ISF settings: ISF depending on blood glucose level</string>
+    <string name="pp_ISF_settings_title">pp_ISF settings: ISF for postprandial glucose rise</string>
+    <string name="delta_ISF_settings_title">delta_ISF settings: ISF for high blood glucose delta</string>
+    <string name="dura_ISF_settings_title">dura_ISF settings: ISF for high blood glucose plateau</string>
+    <string name="smb_delivery_settings_title">smb delivery settings: Tune SMB delivery safety (change with caution)</string>
     <string name="openapsama_enable_autoISF">Use autoISF feature</string>
     <string name="deletefuturetreatments">Delete treatments in the future</string>
     <string name="actions_shortname">ACT</string>
