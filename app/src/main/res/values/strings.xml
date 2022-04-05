@@ -331,7 +331,7 @@
     <string name="openapsama_useautosens">Use Autosens feature</string>
     <string name="refresheventsfromnightscout">Refresh events from NS</string>
     <string name="autoISF_settings_title">autoISF settings</string>
-    <string name="autoISF_settings_summary">autoISF allows to adjust the insulin sensitivity factor based on different factors to optimise insulin delivery when blood glucose rises</string>
+    <string name="autoISF_settings_summary">autoISF allows to adapt the insulin sensitivity factor (ISF) in various scenarios of glucose behaviour</string>
     <string name="acce_ISF_settings_title">acce_ISF settings</string>
     <string name="acce_ISF_settings_summary">acce_ISF settings: adjust ISF for accelerating/decelerating blood glucose</string>
     <string name="bg_ISF_settings_title">bg_ISF settings</string>
@@ -339,11 +339,11 @@
     <string name="pp_ISF_settings_title">pp_ISF settings</string>
     <string name="pp_ISF_settings_summary">pp_ISF settings: ISF for postprandial (after meal) glucose rise</string>
     <string name="delta_ISF_settings_title">delta_ISF settings</string>
-    <string name="delta_ISF_settings_summary">delta_ISF settings: ISF for high rise blood glucose delta</string>
+    <string name="delta_ISF_settings_summary">delta_ISF settings: ISF adaptations for positive delta, i.e. rising blood glucose</string>
     <string name="dura_ISF_settings_title">dura_ISF settings</string>
     <string name="dura_ISF_settings_summary">dura_ISF settings: ISF for blood glucose plateau above target</string>
     <string name="smb_delivery_settings_title">smb delivery settings</string>
-    <string name="smb_delivery_settings_summary">smb delivery settings: Tune SMB delivery safety paramaters to allow larger SMBs when blood glucose rise is detected for better full UAM loop support (change with caution!)</string>
+    <string name="smb_delivery_settings_summary">smb delivery settings:  Set of options to increase the actual SMB size which can be delivered in situations where ISF was strengthened, i.e. fairly low ISF figure.\n\nUSE WITH CAUTION</string>
     <string name="openapsama_enable_autoISF">Use autoISF feature</string>
     <string name="deletefuturetreatments">Delete treatments in the future</string>
     <string name="actions_shortname">ACT</string>
@@ -389,10 +389,10 @@
     <string name="openapsama_pp_ISF_hours_summary">Default value: 3\nThis is the duration in hours how long after a meal the effect will be active. \n\nAAPS will delete carb timing after 10 hours latest no matter what you enter.</string>
     <string name="key_enable_postprandial_ISF_always" translatable="false">enable_postprandial_ISF_always</string>
     <string name="enable_postprandial_ISF_always_summary">Enable the postprandial ISF adaptation all the time regardless of when the last meal was taken.</string>
-    <string name="key_openapsama_BgAccel_ISF_weight" translatable="false">BgAccel_ISF_weight</string>
-    <string name="openapsama_BgAccel_ISF_weight_summary">Default value: 0.0\nThis is the weight applied while glucose accelerates and which strengthens ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
-    <string name="key_openapsama_BgBrake_ISF_weight" translatable="false">BgBrake_ISF_weight</string>
-    <string name="openapsama_BgBrake_ISF_weight_summary">Default value: 0.0\nThis is the weight applied while glucose decelerates and which weakens ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
+    <string name="key_openapsama_bgAccel_ISF_weight" translatable="false">bgAccel_ISF_weight</string>
+    <string name="openapsama_bgAccel_ISF_weight_summary">Default value: 0.0\nThis is the weight applied while glucose accelerates and which strengthens ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
+    <string name="key_openapsama_bgBrake_ISF_weight" translatable="false">bgBrake_ISF_weight</string>
+    <string name="openapsama_bgBrake_ISF_weight_summary">Default value: 0.0\nThis is the weight applied while glucose decelerates and which weakens ISF. \n\nWith 0.0 this contribution is effectively disabled.</string>
     <string name="openapsama_autosens_adjusttargets">Autosens adjust targets, too</string>
     <string name="openapsama_autosens_adjusttargets_summary">Default value: true\nThis is used to allow autosens to adjust BG targets, in addition to ISF and basals.</string>
     <string name="openapsama_bolussnooze_dia_divisor_summary">Default value: 2\nBolus snooze is enacted after you do a meal bolus, so the loop won’t counteract with low temps when you’ve just eaten. The example here and default is 2; so a 3 hour DIA means that bolus snooze will be gradually phased out over 1.5 hours (3DIA/2).</string>
@@ -814,24 +814,24 @@
     <string name="key_always_use_shortavg" translatable="false">always_use_shortavg</string>
     <string name="openapsama_autosens_max">Max autosens ratio</string>
     <string name="openapsama_autosens_min">Min autosens ratio</string>
-    <string name="openapsama_autoISF_max">Max autoISF ratio</string>
-    <string name="openapsama_autoISF_min">Min autoISF ratio</string>
-    <string name="openapsama_lower_ISFrange_weight">lower ISF-range weight</string>
-    <string name="openapsama_higher_ISFrange_weight">higher ISF-range weight</string>
-    <string name="openapsama_delta_ISFrange_weight">delta ISF-range weight</string>
-    <string name="openapsama_pp_ISF_weight">pp_ISF_weight: postprandial ISF weight</string>
-    <string name="openapsama_pp_ISF_hours">pp_ISP_hours: postprandial ISF time window</string>
-    <string name="openapsama_BgAccel_ISF_weight">ISF weight while BG accelerates</string>
-    <string name="openapsama_BgBrake_ISF_weight">ISF weight while BG decelerates</string>
-    <string name="openapsama_dura_ISF_weight">dura_ISF hourly increment</string>
+    <string name="openapsama_autoISF_max">Max autoISF ratio\n(autoISF_max)</string>
+    <string name="openapsama_autoISF_min">Min autoISF ratio\n(autoISF_min)</string>
+    <string name="openapsama_lower_ISFrange_weight">lower ISF-range weight\n(lower_ISFrange_weight)</string>
+    <string name="openapsama_higher_ISFrange_weight">higher ISF-range weight\n(higher_ISFrange_weight)</string>
+    <string name="openapsama_delta_ISFrange_weight">delta ISF-range weight\n(delta_ISFrange_weight)</string>
+    <string name="openapsama_pp_ISF_weight">postprandial ISF weight\n(pp_ISF_weight)</string>
+    <string name="openapsama_pp_ISF_hours">postprandial ISF time window\n(pp_ISP_hours)</string>
+    <string name="openapsama_bgAccel_ISF_weight">Weight while BG accelerates\n(bgAccel_ISF_weight)</string>
+    <string name="openapsama_bgBrake_ISF_weight">Weight while BG decelerates\n(bgBrake_ISF_weight)</string>
+    <string name="openapsama_dura_ISF_weight">dura_ISF weight\n(dura_ISF_weight)</string>
     <string name="openapsama_bolussnooze_dia_divisor">Bolus snooze dia divisor</string>
     <string name="openapsama_max_daily_safety_multiplier">Max daily safety multiplier</string>
     <string name="openapsama_current_basal_safety_multiplier">Current basal safety multiplier</string>
-    <string name="openapsama_smb_delivery_ratio">fixed SMB delivery ratio</string>
-    <string name="openapsama_smb_delivery_ratio_min">variable SMB delivery ratio, lower end</string>
-    <string name="openapsama_smb_delivery_ratio_max">variable SMB delivery ratio, upper end</string>
-    <string name="openapsama_smb_delivery_ratio_bg_range">variable SMB delivery ratio, mapped glucose range</string>
-    <string name="openapsama_smb_max_range_extension">SMB/UAM max range extension</string>
+    <string name="openapsama_smb_delivery_ratio">fixed SMB delivery ratio\n(smb_delivery_ratio)</string>
+    <string name="openapsama_smb_delivery_ratio_min">variable SMB delivery ratio, lower end\n(smb_delivery_ratio_min)</string>
+    <string name="openapsama_smb_delivery_ratio_max">variable SMB delivery ratio, upper end\n(smb_delivery_ratio_max)</string>
+    <string name="openapsama_smb_delivery_ratio_bg_range">variable SMB delivery ratio, mapped glucose range\n(smb_delivery_ratio_bg_range)</string>
+    <string name="openapsama_smb_max_range_extension">SMB/UAM max range extension\n(smb_max_range_extension)</string>
     <string name="value_unavailable_short">n/a</string>
     <string name="key_virtualpump_uploadstatus" translatable="false">virtualpump_uploadstatus</string>
     <string name="virtualpump_type">Virtual Pump Type</string>

@@ -321,7 +321,7 @@ function autoISF(sens, target_bg, profile, glucose_status, meal_data, currentTim
         var avg05_weight = weightISF / target_bg;                                       // mod gz7b: provide access from AAPS
         dura_ISF += dura05_weight*avg05_weight*(avg05-target_bg);
         sens_modified = true;
-        console.error("dura_ISF  adaptation is", round(dura_ISF,2), "because ISF", round(sens,1), "did not do it for", round(dura05,1),"m");
+        console.error("dura_ISF adaptation is", round(dura_ISF,2), "because ISF", round(sens,1), "did not do it for", round(dura05,1),"m");
     }
     if ( sens_modified ) {
         liftISF = Math.max(dura_ISF, bg_ISF, delta_ISF, acce_ISF, pp_ISF);
