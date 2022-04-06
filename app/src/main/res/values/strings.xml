@@ -376,7 +376,7 @@
     <string name="openapsama_autoISF_max_summary">Default value: 1.2\nThis is a multiplier cap for autoISF to set a limit on how high the autoISF ratio can be, which in turn determines how low it can adjust ISF.</string>
     <string name="openapsama_autoISF_min_summary">Default value: 1.0\nThis is a multiplier cap for autoISF to set a limit on how low the autoISF ratio can be, which in turn determines how high it can adjust ISF.</string>
     <string name="key_openapsama_dura_ISF_weight" translatable="false">dura_ISF_weight</string>
-    <string name="openapsama_dura_ISF_weight_summary">Default value: 0.2\nThis is the rate at which autoISF grows per hour assuming bg is twice the target. With a value of 1.0 it will have reduced ISF to 50% after 1 hour of bg at twice the target.\n\nWith 0.0 the effect of autoISF is effectively disabled.</string>
+    <string name="openapsama_dura_ISF_weight_summary">Default value: 0.0\nThis is the rate at which autoISF grows per hour assuming bg is twice the target. With a value of 1.0 it will have reduced ISF to 50% after 1 hour of bg at twice the target.\n\nWith 0.0 the effect of autoISF is effectively disabled.</string>
     <string name="key_openapsama_lower_ISFrange_weight" translatable="false">lower_ISFrange_weight</string>
     <string name="openapsama_lower_ISFrange_weight_summary">Default value: 0.0\nThis is the weight applied to the polygon which adapats ISF if glucose is below target. \n\nWith 0.0 the effect is effectively disabled.</string>
     <string name="key_openapsama_higher_ISFrange_weight" translatable="false">higher_ISFrange_weight</string>

@@ -231,20 +231,20 @@ class DetermineBasalAdapterSMBJS internal constructor(private val scriptReader: 
         // mod 7e: can I add use autoisf here?
         this.profile.put("enable_autoISF", sp.getBoolean(R.string.key_enable_autoISF, false))
         // mod 7f: can I add use autoisf with COB here?
-        this.profile.put("autoISF_max",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoISF_max, "1.2")))
+        this.profile.put("autoISF_max",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoISF_max, "1.0")))
         this.profile.put("autoISF_min",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_autoISF_min, "1.0")))
         this.profile.put("bgAccel_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_bgAccel_ISF_weight, "0.0")))
         this.profile.put("bgBrake_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_bgBrake_ISF_weight, "0.0")))
         // mod 14f: for pp_ISF without meal
         this.profile.put("enable_pp_ISF_always", sp.getBoolean(R.string.key_enable_postprandial_ISF_always, false))
-        this.profile.put("pp_ISF_hours",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_pp_ISF_hours, "0.0")))
+        this.profile.put("pp_ISF_hours",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_pp_ISF_hours, "3.0")))
         this.profile.put("pp_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_pp_ISF_weight, "0.0")))
         this.profile.put("delta_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_delta_ISFrange_weight, "0.0")))
         this.profile.put("lower_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_lower_ISFrange_weight, "0.0")))
         this.profile.put("higher_ISFrange_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_higher_ISFrange_weight, "0.0")))
         this.profile.put("enable_dura_ISF_with_COB", sp.getBoolean(R.string.key_enable_dura_ISF_with_COB, false))
         // mod 7d: can I add autosens_min here?
-        this.profile.put("dura_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_dura_ISF_weight, "0.2")))
+        this.profile.put("dura_ISF_weight",  SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_dura_ISF_weight, "0.0")))
         // mod 10: include SMB manipulations to be accessible in determine-basal
         this.profile.put("smb_delivery_ratio", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio, "0.5")))
         this.profile.put("smb_delivery_ratio_min", SafeParse.stringToDouble(sp.getString(R.string.key_openapsama_smb_delivery_ratio_min, "0.5")))

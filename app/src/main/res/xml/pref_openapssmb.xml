@@ -233,7 +233,7 @@
                 validate:testType="floatNumericRange" />
 
             <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
-                android:defaultValue="1.2"
+                android:defaultValue="1.0"
                 android:dialogMessage="@string/openapsama_autoISF_max_summary"
                 android:digits="0123456789.,"
                 android:inputType="numberDecimal"
@@ -262,7 +262,7 @@
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:title="@string/openapsama_bgAccel_ISF_weight"
-                    validate:floatmaxNumber="1"
+                    validate:floatmaxNumber="2"
                     validate:floatminNumber="0"
                     validate:testType="floatNumericRange" />
 
@@ -395,7 +395,7 @@
                     android:title="@string/enableautoISFwithcob" />
 
                 <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
-                    android:defaultValue="0.2"
+                    android:defaultValue="0.0"
                     android:dialogMessage="@string/openapsama_dura_ISF_weight_summary"
                     android:digits="0123456789.,"
                     android:inputType="numberDecimal"
@@ -427,7 +427,7 @@
                     android:singleLine="true"
                     android:title="@string/openapsama_smb_delivery_ratio"
                     validate:floatmaxNumber="1"
-                    validate:floatminNumber="0.1"
+                    validate:floatminNumber="0.5"
                     validate:testType="floatNumericRange" />
 
                 <info.nightscout.androidaps.utils.textValidator.ValidatingEditTextPreference
