@@ -262,7 +262,7 @@
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:title="@string/openapsama_bgAccel_ISF_weight"
-                    validate:floatmaxNumber="2"
+                    validate:floatmaxNumber="1"
                     validate:floatminNumber="0"
                     validate:testType="floatNumericRange" />
 
@@ -354,7 +354,7 @@
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:title="@string/openapsama_pp_ISF_weight"
-                    validate:floatmaxNumber="2"
+                    validate:floatmaxNumber="1"
                     validate:floatminNumber="0"
                     validate:testType="floatNumericRange" />
 
@@ -376,7 +376,7 @@
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:title="@string/openapsama_delta_ISFrange_weight"
-                    validate:floatmaxNumber="2"
+                    validate:floatmaxNumber="1"
                     validate:floatminNumber="0"
                     validate:testType="floatNumericRange" />
 
