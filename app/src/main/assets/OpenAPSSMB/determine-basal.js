@@ -110,6 +110,24 @@ function enable_smb(
     return false;
 }
 
+function loop_smb(profile, iob_data) {
+    if (profile.temptargetSet) {
+        var target = profile.min_bg;
+        profile.iob_threshold_percent=101;      // effectively disabled; later make it variable
+        if (profile.iob_threshold_percent/100 < iob_data.iob/profile.max_iob) {
+            console.error("SMB disabled by full loop logic: iob",iob_data.iob,"is more than", profile.iob_threshold_percent+"% of maxIOB",profile.max_iob);
+            return "iobTH";
+        } else if ( target % 2 == 1 ) {         // odd number
+            console.error("SMB disabled by full loop logic: odd TT");
+            return "blocked";
+        } else {
+            console.error("SMB enabled by full loop logic: even TT");
+            return "enforced";                  // even number
+        }
+    }
+    return "AAPS";                              // leave it to standard AAPS
+}
+
 function interpolate(xdata, profile) //, polygon)
 {   // V14: interpolate ISF behaviour based on polygons defining nonlinear functions defined by value pairs for ...
     //  ...      <-----  delta  ------->  or  <---------------  glucose  ------------------->
@@ -237,13 +255,22 @@ function autoISF(sens, target_bg, profile, glucose_status, meal_data, currentTim
     } else {
         var fit_share = 10*(fit_corr-0.9);                              // 0 at correlation 0.9, 1 at 1.00
         var cap_weight = 1;                                             // full contribution above target
-        if ( glucose_status.glucose<profile.target_bg && bg_acce>1 ) {  // corrected 09.JAN.2022 to reduce effect if acce>1
-            cap_weight = 0.5;                                           // halve the effect below target
-        }
-        if ( bg_acce < 0 ) {
-            var acce_weight = profile.bgBrake_ISF_weight;
-        } else {
-            var acce_weight = profile.bgAccel_ISF_weight;
+        var acce_weight = 1;
+        if ( glucose_status.glucose<profile.target_bg ) {               // below target acce goes towards target
+            if ( bg_acce > 0 ) {
+                if ( bg_acce>1)            { cap_weight = 0.5; }        // halve the effect below target
+                acce_weight = profile.bgBrake_ISF_weight;
+
+            } else if ( bg_acce < 0 ) {
+                acce_weight = profile.bgAccel_ISF_weight;
+            }
+        } else {                                                        // above target acce goes away from target
+            if ( bg_acce < 0 ) {
+                acce_weight = profile.bgBrake_ISF_weight;
+            } else if ( bg_acce > 0 ) {
+
+                acce_weight = profile.bgAccel_ISF_weight;
+            }
         }
         acce_ISF = 1 + bg_acce * cap_weight * acce_weight * fit_share;
         console.error("acce_ISF adaptation is", round(acce_ISF,2));
@@ -687,13 +714,20 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
     ZTpredBGs.push(bg);
     UAMpredBGs.push(bg);
 
-    var enableSMB = enable_smb(
+    var loop_wants_smb = loop_smb(profile, iob_data);
+    var enableSMB = false;
+    var loop_wanted_smb = loop_wants_smb;
+    if (microBolusAllowed && loop_wanted_smb != "AAPS") {
+        if ( loop_wanted_smb == "enforced" ) {              // otherwise FL switched SMB off
+            enableSMB = true;
+        }
+    } else { enableSMB = enable_smb(
         profile,
         microBolusAllowed,
         meal_data,
         target_bg
-    );
-
+       );
+    }
     // enable UAM (if enabled in preferences)
     var enableUAM=(profile.enableUAM);
 
