@@ -31,11 +31,11 @@ class XdripPlugin @Inject constructor(
     aapsLogger, resourceHelper, injector
 ), BgSourceInterface {
 
-    private var advancedFiltering = false
+    private var advancedFiltering = true
     private var sensorBatteryLevel = -1
 
     override fun advancedFilteringSupported(): Boolean {
-        return advancedFiltering
+        return true
     }
 
     override fun handleNewData(intent: Intent) {
